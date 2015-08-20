@@ -1,0 +1,24 @@
+{
+  "name": "tailor.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ecofic/tailor.js",
+  "authors": [
+    "Chad Campbell <chad.campbell@ecofic.com>"
+  ],
+  "description": "A utility library for building adaptive web apps.",
+  "main": "./dist/tailor.js",
+  "keywords": [
+	"tailor",
+    "adaptive",
+    "responsive"
+  ],
+  "devDependencies": {
+  },
+  "license": "Apache",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
