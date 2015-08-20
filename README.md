@@ -1,3 +1,6 @@
+[![Version](http://img.shields.io/badge/version-0.1.0-yellow.svg?style=flat)](https://www.ecofic.com)
+[![Built with Gulp](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 # What is Tailor.js?
 Tailor.js is a utility for building adaptive web apps.
 
@@ -5,7 +8,7 @@ Tailor.js is a utility for building adaptive web apps.
 
 ## What other features does Tailor.js have?
 
-## Using Tailor.js
+# Using Tailor.js
 To use Tailor.js in your web app, do the following:
 
 1. Add the Tailor.js library
@@ -23,8 +26,15 @@ If you prefer npm, use `npm install tailor.js --save-dev`
 `window.onresize = tailor();`
 
 
-## Contributing to Tailor.js
+# Contributing to Tailor.js
+
+## Branching Tailor.js
+Tailor.js uses the [GitHub Flow](https://guides.github.com/introduction/flow/) workflow.
+
+## Building Tailor.js
 
 `gulp`
+
+## Testing Tailor.js
 
 `gulp test`
