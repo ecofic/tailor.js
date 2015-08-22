@@ -1,5 +1,5 @@
 [![Version](http://img.shields.io/badge/version-0.1.0-yellow.svg?style=flat)](https://www.ecofic.com)
-[![Built with Gulp](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is Tailor.js?
 Tailor.js is a utility for building adaptive web apps.
