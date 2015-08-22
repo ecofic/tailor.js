@@ -1,3 +1,7 @@
+/*
+ * This is the heart of the Tailor utility. Basically, you should have the following in your web page:
+ * window.onresize = tailor;
+ */
 function tailor() {
   // Only tailor the view if the user is not resizing the window.
   tailor.lastResizing = new Date().getTime();  
@@ -53,14 +57,19 @@ tailor.configure = function(options) {
     tailor.breakpoints = tailor.supported.defaults.breakpoints;    
   }
   
-  // Identify the the current target type if it has not been specified
-  if (options.targetType) {
-    config.targetType = options.targetType;
+  // Identify if the list of supported layouts or cookie name have been specified
+  config.layouts = (options.layouts) ? options.layout : tailor.settings.layouts;
+  config.layoutCookieName = (options.layoutCookieName) ? options.layoutCookieName : tailor.settings.layoutCookieName;
+    
+  // Identify the the current layout if it has not been specified
+  if (options.layout) {
+    config.layout = options.layout;
   } else {
     document.addEventListener("DOMContentLoaded", function(event) {     
-      config.targetType = tailor.getTargetType();
+      config.layout = tailor.getLayout();
     });    
   }  
+  
   tailor.settings = config;
 };
 
@@ -76,10 +85,12 @@ tailor.attemptReload = function() {
       tailor.resizeTimer = null;
     }
   
-    var targetType = tailor.getTargetType();
-    if (targetType != tailor.settings.targetType) {        
-      tailor.settings.targetType = targetType;
-//      console.log('Set content to ' + tailor.settings.targetType);
+    var layout = tailor.getLayout();
+    if (layout != tailor.settings.layout) {        
+//      console.log('Set content to ' + tailor.settings.layout);
+      
+      tailor.settings.layout = layout;
+      document.cookie = tailor.settings.layoutCookieName + '=' + layout;      
       location.reload();
     }
   } else {
@@ -92,41 +103,29 @@ tailor.attemptReload = function() {
  * This is a utility method that helps identify what type of target
  * the screen width is associated with.
  */
-tailor.getTargetType = function(t) {
-  var targetType = tailor.breakpoints.length + 1;
+tailor.getLayout = function(t) {
+  var layout = tailor.settings.layouts[tailor.settings.layouts.length-1];
   
   var width = document.body.scrollWidth; 
   for (var i=0; i<tailor.breakpoints.length; i++) {
     if (width < tailor.breakpoints[i]) {
-      targetType = i + 1;
+      layout = tailor.settings.layouts[i];
       break;
     }
   }
   
-//  console.log('width: ' + width + '  targetType: ' + targetType + '  highest: ' + tailor.breakpoints[tailor.breakpoints.length-1]);     
-  return targetType;
+//  console.log('width: ' + width + '  layout: ' + layout + '  highest: ' + tailor.breakpoints[tailor.breakpoints.length-1]);     
+  return layout;
 }
-
-// lastResizing is an internal variable that should not be accessed outside of this library.
-// This variable determines whether the user is in the process or resizing the window or not.
-// It helps serve as a lock to prevent unnecessary refreshes.
-tailor.lastResizing = null;
-
-// resizeTimer is an internal variable that should not be accessed outside of this library.
-// This variable is used as a handle to the timeout determine if the user is still resizing
-// the window or not.
-tailor.resizeTimer = null;
-
-// breakpoints is an internal variable that should not be accessed outside of this library.
-// This variable is used to determine where a screen resizing should occur.
-tailor.breakpoints = [];
 
 // The settings to use 
 tailor.settings = {
   framework:null,
   version:null,
-  targetType: null,
-  resizeThreshold: 200
+  resizeThreshold: 200,
+  layout: null,                                  // This is the current layout used in your app. When the page is loaded, it should be set if possible. Think of this as the link between the server-side and the client-side.
+  layouts: ['mobile', 'portrait', 'landscape'],  // This is the list of layouts supported by your app. This list works with the list of breakpoints you choose/set to identify which layout should be used.
+  layoutCookieName: 'layout'                     // This is the name of the cookie to look at on the server to identify which layout to use
 };
 
 tailor.supported = {  
@@ -152,3 +151,17 @@ tailor.supported = {
     breakpoints: [ 640, 1024 ]
   }
 };
+
+// lastResizing is an internal variable that should not be accessed outside of this library.
+// This variable determines whether the user is in the process or resizing the window or not.
+// It helps serve as a lock to prevent unnecessary refreshes.
+tailor.lastResizing = null;
+
+// resizeTimer is an internal variable that should not be accessed outside of this library.
+// This variable is used as a handle to the timeout determine if the user is still resizing
+// the window or not.
+tailor.resizeTimer = null;
+
+// breakpoints is an internal variable that should not be accessed outside of this library.
+// This variable is used to determine where a screen resizing should occur.
+tailor.breakpoints = [];
