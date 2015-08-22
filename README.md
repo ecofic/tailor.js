@@ -21,8 +21,8 @@ If you prefer npm, use `npm install tailor.js --save-dev`
 3. Configure Tailor.js
 `tailor.configure({ framework:'bootstrap', version:'4.0.0-alpha' });`
 
-4. Tailor your page when the window resizes.
-`window.onresize = tailor();`
+4. Tailor your page when the window resizes. Notice the lack of `()` after `tailor`.
+`window.onresize = tailor;`
 
 
 # Contributing to Tailor.js
