@@ -1,8 +1,7 @@
-[![Version](http://img.shields.io/badge/version-0.1.0-yellow.svg?style=flat)](https://www.ecofic.com)
+[![Version](http://img.shields.io/badge/version-0.2.0-yellow.svg?style=flat)](https://www.ecofic.com)
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is Tailor.js?
-Tailor.js is a utility for building adaptive web apps.
 
 ## What problems does Tailor.js solve?
 
@@ -27,14 +26,23 @@ If you prefer npm, use `npm install tailor.js --save-dev`
 
 
 # Contributing to Tailor.js
+Tailor.js is available for contribution. As new responsive frameworks (and versions of existing frameworks) emerge, 
+it may make sense to update this library to include them. 
+to include those breakpoints in the `tailor.supported.[framework]` section. The 
 
 ## Branching Tailor.js
 Tailor.js uses the [GitHub Flow](https://guides.github.com/introduction/flow/) workflow.
+
+## Developing in Tailor.js
+In short, Tailor.js 
 
 ## Building Tailor.js
 
 `gulp`
 
 ## Testing Tailor.js
+Tests for Tailor.js are written with [Jasmine](http://jasmine.github.io/). To ensure Tailor.js is robust,
+pull requests must include tests covering the contribution. Tests are located in the `[./test](https://github.com/ecofic/tailor.js/tree/master/test)`
+directory. To run the tests, just use:
 
 `gulp test`
