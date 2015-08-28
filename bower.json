@@ -14,7 +14,7 @@
   ],
   "devDependencies": {
   },
-  "license": "Apache",
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
