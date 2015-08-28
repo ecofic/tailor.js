@@ -1,4 +1,4 @@
-[![Version](http://img.shields.io/badge/version-0.2.0-yellow.svg?style=flat)](https://www.ecofic.com)
+[![Version](http://img.shields.io/badge/version-0.3.0-yellow.svg?style=flat)](https://www.ecofic.com)
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is Tailor.js?

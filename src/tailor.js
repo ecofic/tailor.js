@@ -8,7 +8,7 @@ function tailor() {
   if (!tailor.resizeTimer) {
     tailor.resizeTimer = setTimeout(tailor.attemptReload, tailor.settings.resizeThreshold);
   }
-};
+}
 
 /*
  * This function is used to configure, or initialize, Tailor.js.
@@ -65,7 +65,7 @@ tailor.configure = function(options) {
   if (options.layout) {
     config.layout = options.layout;
   } else {
-    document.addEventListener("DOMContentLoaded", function(event) {     
+    document.addEventListener('DOMContentLoaded', function(event) {     
       config.layout = tailor.getLayout();
     });    
   }  
@@ -116,7 +116,7 @@ tailor.getLayout = function(t) {
   
 //  console.log('width: ' + width + '  layout: ' + layout + '  highest: ' + tailor.breakpoints[tailor.breakpoints.length-1]);     
   return layout;
-}
+};
 
 // The settings to use 
 tailor.settings = {

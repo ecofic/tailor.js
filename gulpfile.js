@@ -21,7 +21,9 @@ gulp.task('default', ['build']);
  gulp.task('build', function() {
 	return gulp.src(input.js)
 		.pipe(jshint())
-		.pipe(jshint.reporter('fail'))		// Breaks the build in the event of a JSHint failure.	 
+		.pipe(jshint.reporter('default'))		// Breaks the build in the event of a JSHint failure.	 
+		.pipe(jshint.reporter('fail'))		
+	;
  });
  
  gulp.task('test', function() {
