@@ -2,6 +2,7 @@
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is Tailor.js?
+Tailor.js IS IN DEVELOPMENT. DO NOT USE AT THIS TIME.
 
 ## What problems does Tailor.js solve?
 
