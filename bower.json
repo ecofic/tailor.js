@@ -1,5 +1,5 @@
 {
-  "name": "tailor.js",
+  "name": "tailorjs",
   "version": "0.3.0",
   "homepage": "https://github.com/ecofic/tailor.js",
   "authors": [
@@ -8,9 +8,12 @@
   "description": "A utility library for building adaptive web apps.",
   "main": "./dist/tailor.js",
   "keywords": [
-	"tailor",
+	  "tailor",
+    "tailorjs",
     "adaptive",
-    "responsive"
+    "responsive",
+    "front-end",
+    "web"
   ],
   "devDependencies": {
   },

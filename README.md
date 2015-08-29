@@ -1,22 +1,22 @@
 [![Version](http://img.shields.io/badge/version-0.3.0-yellow.svg?style=flat)](https://www.ecofic.com)
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
-# What is Tailor.js?
-Tailor.js IS IN DEVELOPMENT. DO NOT USE AT THIS TIME.
+# What is TailorJS?
+TailorJS IS IN DEVELOPMENT. DO NOT USE AT THIS TIME.
 
-## What problems does Tailor.js solve?
+## What problems does TailorJS solve?
 
-## What other features does Tailor.js have?
+## What other features does TailorJS have?
 
-# Using Tailor.js
-To use Tailor.js in your web app, do the following:
+# Using TailorJS
+To use TailorJS in your web app, do the following:
 
-1. Add the Tailor.js library
-If you like bower, use `bower install tailor.js`
+1. Add the TailorJS library
+If you like bower, use `bower install tailorjs`
 
-If you prefer npm, use `npm install tailor.js --save-dev`
+If you prefer npm, use `npm install tailorjs --save-dev`
 
-2. Reference Tailor.js in your web page.
+2. Reference TailorJS in your web page.
 
 `<script type="text/javascript" src="./tailor.js" />`
 	
@@ -29,23 +29,23 @@ If you prefer npm, use `npm install tailor.js --save-dev`
 `window.onresize = tailor;`
 
 
-# Contributing to Tailor.js
+# Contributing to TailorJS
 Tailor.js is available for contribution. As new responsive frameworks (and versions of existing frameworks) emerge, 
 it may make sense to update this library to include them. 
 to include those breakpoints in the `tailor.supported.[framework]` section. The 
 
-## Branching Tailor.js
-Tailor.js uses the [GitHub Flow](https://guides.github.com/introduction/flow/) workflow.
+## Branching TailorJS
+TailorJS uses the [GitHub Flow](https://guides.github.com/introduction/flow/) workflow.
 
-## Developing in Tailor.js
-In short, Tailor.js 
+## Developing in TailorJS
+In short, TailorJS
 
-## Building Tailor.js
+## Building TailorJS
 
 `gulp`
 
-## Testing Tailor.js
-Tests for Tailor.js are written with [Jasmine](http://jasmine.github.io/). To ensure Tailor.js is robust,
+## Testing TailorJS
+Tests for TailorJS are written with [Jasmine](http://jasmine.github.io/). To ensure TailorJS is robust,
 pull requests must include tests covering the contribution. Tests are located in the `[./test](https://github.com/ecofic/tailor.js/tree/master/test)`
 directory. To run the tests, just use:
 
