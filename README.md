@@ -16,12 +16,15 @@ If you like bower, use `bower install tailor.js`
 If you prefer npm, use `npm install tailor.js --save-dev`
 
 2. Reference Tailor.js in your web page.
+
 `<script type="text/javascript" src="./tailor.js" />`
 	
 3. Configure Tailor.js
+
 `tailor.configure({ framework:'bootstrap', version:'4.0.0-alpha' });`
 
 4. Tailor your page when the window resizes. Notice the lack of `()` after `tailor`.
+
 `window.onresize = tailor;`
 
 

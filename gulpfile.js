@@ -1,13 +1,16 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
+var rename = require("gulp-rename");
+var fs = require('fs');
 
 var input = {
 	js: './src/tailor.js'
 };
 
 var output = {
-	dir: './dist'	
+	dir: './dist',
+	filename: 'tailor.min.js'
 };
 
 gulp.task('default', ['build']);
@@ -31,5 +34,7 @@ gulp.task('default', ['build']);
 		.pipe(jshint())
 		.pipe(jshint.reporter('fail'))
 		.pipe(uglify())
+		.pipe(rename(output.filename))
+		.pipe(gulp.dest(output.dir))
 	;
  });
