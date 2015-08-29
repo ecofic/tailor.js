@@ -14,13 +14,15 @@
     "front-end",
     "web"
   ],
-  "devDependencies": {
-  },
   "license": "MIT",
   "ignore": [
     "**/.*",
+    ".gitignore",
+    ".jshintrc",    
     "node_modules",
-    "bower_components",
-    "test"
+    "test",
+    "gulpfile.js",
+    "package.json",
+    "README.md"    
   ]
 }
