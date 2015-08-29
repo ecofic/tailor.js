@@ -1,12 +1,9 @@
 var gulp = require('gulp');
-var jasmine = require('gulp-jasmine');
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
 
 var input = {
-	js: './src/tailor.js',
-	tests: [
-		'./test/**/*.unit.js'
-	]
+	js: './src/tailor.js'
 };
 
 var output = {
@@ -25,8 +22,14 @@ gulp.task('default', ['build']);
 		.pipe(jshint.reporter('fail'))		
 	;
  });
- 
- gulp.task('test', function() {
-	 return gulp.src(input.tests)
-	 	.pipe(jasmine()); 
+  
+ /*
+  * This task is used to create the distributed version of Tailor.js.
+  */
+ gulp.task('deploy', function() {
+	return gulp.src(input.js)
+		.pipe(jshint())
+		.pipe(jshint.reporter('fail'))
+		.pipe(uglify())
+	;
  });
