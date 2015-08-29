@@ -2,7 +2,7 @@
   "name": "tailorjs",
   "homepage": "https://github.com/ecofic/tailor.js",
   "authors": [
-    "Chad Campbell <chad.campbell@ecofic.com>"
+    { "name":"Chad Campbell", "email":"chad.campbell@ecofic.com", "homepage":"http://www.ecofic.com" }
   ],
   "description": "A utility library for building adaptive web apps.",
   "main": "./dist/tailor.js",
