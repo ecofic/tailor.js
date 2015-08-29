@@ -59,7 +59,7 @@ tailor.configure = function(options) {
   
   // Identify if the list of supported layouts or cookie name have been specified
   config.layouts = (options.layouts) ? options.layout : tailor.settings.layouts;
-  config.layoutCookieName = (options.layoutCookieName) ? options.layoutCookieName : tailor.settings.layoutCookieName;
+  config.layoutTokenName = (options.layoutTokenName) ? options.layoutTokenName : tailor.settings.layoutTokenName;
     
   // Identify the the current layout if it has not been specified
   if (options.layout) {
@@ -88,10 +88,24 @@ tailor.attemptReload = function() {
     var layout = tailor.getLayout();
     if (layout != tailor.settings.layout) {        
 //      console.log('Set content to ' + tailor.settings.layout);
-      
-      tailor.settings.layout = layout;
-      document.cookie = tailor.settings.layoutCookieName + '=' + layout;      
-      location.reload();
+
+      tailor.settings.layout = layout;      
+      if (navigator.cookieEnabled) {
+        document.cookie = tailor.settings.layoutTokenName + '=' + layout;              
+        location.reload();        
+      } else {
+        // If cookies are not allowed add/replace a query string parameter with the layout value.
+        var url = location.href;        
+        
+        var regex = new RegExp('([?&])' + tailor.settings.layoutTokenName + '=.*?(&|$)', 'i');
+        if (url.match(regex)) {
+          url = url.replace(regex, '$1' + tailor.settings.layoutTokenName + '=' + layout + '$2');
+        } else {
+          var divider = url.indexOf('?') !== -1 ? '&' : '?';          
+          url = url + divider + tailor.settings.layoutTokenName + '=' + layout;
+        }
+        location.replace(url);
+      }      
     }
   } else {
     // Restart the timer
@@ -125,7 +139,7 @@ tailor.settings = {
   resizeThreshold: 200,
   layout: null,                                  // This is the current layout used in your app. When the page is loaded, it should be set if possible. Think of this as the link between the server-side and the client-side.
   layouts: ['mobile', 'portrait', 'landscape'],  // This is the list of layouts supported by your app. This list works with the list of breakpoints you choose/set to identify which layout should be used.
-  layoutCookieName: 'layout'                     // This is the name of the cookie to look at on the server to identify which layout to use
+  layoutTokenName: 'layout'                      // This is the name of the cookie or query string value to look at on the server to identify which layout to use
 };
 
 tailor.supported = {  
