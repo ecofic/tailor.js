@@ -1,11 +1,11 @@
-[![Version](http://img.shields.io/badge/version-0.5.0-yellow.svg?style=flat)](https://www.ecofic.com)
+[![Version](http://img.shields.io/badge/version-0.6.0-yellow.svg?style=flat)](https://www.ecofic.com)
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is TailorJS?
 TailorJS is a library for helping you build adaptive web sites.
 
 ## What problems does TailorJS solve?
-TailorJS helps solve several problems.
+TailorJS helps solve several challenges with building modern, fast web sites.
 
 ### TailorJS helps you build adaptive web sites
 An adaptive web site enables a greater range of designs based on the user's browser's capabilities.
@@ -20,25 +20,39 @@ less bandwidth means lower cost.
 Your web site will be downloaded faster because you are only returning the content that is required. Once downloaded,
 your web site will render faster. The reason why is because your site will only have to load the content that's needed.
 
-### The server does not know enough about the user's browser.
-When a user visits your website, some limited information is shared with the server. One of the missing
-pieces is the width and height of the user's browser. TailorJS stores this information in either a cookie or
-the query string so that you can use it on the server.
+### TailorJS helps you get more info about the user's browser to your server.
+When a user visits your website, some information is shared with the server. However, some of that information is
+missing. For example, the width and height of the user's browser. 
+
+TailorJS provides an easy to use label to work with the width. Instead of some pixel value, TailorJS goes one step further.
+TailorJS looks at the CSS framework you're using and then communicates the layout to your server.
 
 ## What other features does TailorJS have?
 TailorJS has several other subtle features to help you build adaptive web sites.
 
 ### Pre-Configured Layouts
 TailorJS has reviewed several CSS frameworks to help map between their breakpoints and common layout approaches. 
+While these are preconfigured, mapping the layouts yourself as described in the Configuring TailorJS section below.
 
 #### Bootstrap
-TailorJS has been pre-configured with support for the following bootstrap version
+TailorJS has been pre-configured with support for the following versions of [Bootstrap](http://getbootstrap.com/). 
+In the event you are using a version that TailorJS does not support, the 'Default' values will be used.
 
 | Version     | Mobile Layout    | Portrait Layout | Landscape |
 |-------------|------------------|-----------------|-----------|
 | 4.0.0-alpha | < 768            | < 992           | >= 992    |
 | 3.3.5       | < 768            | < 992           | >= 992    |
 | Default     | < 768            | < 992           | >= 992    |
+
+#### Foundation
+TailorJS has been pre-configured with support for the following versions of [Zurb's Foundation framework](http://foundation.zurb.com/).
+In the event you are using a version that TailorJS does not support, the 'Default' values will be used.
+
+| Version     | Mobile Layout    | Portrait Layout | Landscape |
+|-------------|------------------|-----------------|-----------|
+| ?           | < 641            | < 1025          | >= 1025   |
+| Default     | < 641            | < 1025          | >= 1025   |
+
 
 ### Default
 If you do not configure TailorJS with the name of a supported framework, the default values will be used. Those are:
@@ -56,7 +70,7 @@ a parameter that will be placed in the query string.
 TailorJS uses a token to let the server know whether the user's browser has geolocation capabilities.
 
 # Using TailorJS
-To use TailorJS you can either follow the step-by-step instructions below or look at it all together.
+To use TailorJS you can follow the step-by-step instructions below or look at it all together.
 
 ## Step-by-Step
 To use TailorJS in your web app, do the following:

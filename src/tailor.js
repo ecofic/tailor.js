@@ -226,6 +226,15 @@ tailor.supported = {
         breakpoints: [ 768, 992 ]
       }
     },
+    
+    foundation: {
+      v4_0_0 : {
+        breakpoints: [ 641, 1025 ]
+      },
+      defaults : {
+        breakpoints: [ 641, 1025 ]        
+      }
+    },
   
     // Settings for a custom library
     custom: {
