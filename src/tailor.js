@@ -64,11 +64,11 @@ tailor.configure = function(options) {
   config.layout.tokenName = (options.layout.tokenName) ? options.layout.tokenName : tailor.settings.layout.tokenName;
   
   // Identify if the browser supports gps
-  config.abilities = tailor.settings.abilities;
-  if (navigator.geolocation) {
-      config.abilities.gps.isAvailable = navigator.geolocation;    
+  config.gps = tailor.settings.gps;
+  if (navigator.geolocation) {      
+      config.gps.isAvailable = navigator.geolocation;    
       // removed until further testing has occurred.
-      // tailor.changedParams.push({key: config.abilities.gps.tokenName, value:true });          
+      // tailor.changedParams.push({key: config.gps.tokenName, value:true });          
   }
   
   // Identifiy if the current layout has been specified
@@ -195,12 +195,10 @@ tailor.getLayout = function(t) {
 
 // The settings to use 
 tailor.settings = {  
-  // Capabilities represent the browser's client-side capabilities
-  abilities: {
-    gps: {
-      tokenName: 'gps',                                // This is the name of the cookie or query string value to look at on the server to identify if the user's browser supports Geolocation
-      isAvailable: false                               // A flag that signals whether the user's browser supports geolocation.  
-    }
+  // The following are the gps settings used by tailor
+  gps: {
+    tokenName: 'gps',                                  // This is the name of the cookie or query string value to look at on the server to identify if the user's browser supports Geolocation
+    isAvailable: false                                 // A flag that signals whether the user's browser supports geolocation.
   },
   
   // The following are the layout settings used by tailor  
