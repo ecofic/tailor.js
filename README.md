@@ -2,21 +2,21 @@
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is TailorJS?
-TailorJS
+TailorJS is a library for helping you build adaptive web sites.
 
 ## What problems does TailorJS solve?
 TailorJS helps solve several problems.
 
-### Helps you build adaptive web sites
+### TailorJS helps you build adaptive web sites
 An adaptive web site enables a greater range of designs based on the user's browser's capabilities.
 TailorJS helps you take advantage of those capabilities and adjust on the server-side as needed.
 
-#### Save on bandwidth costs
+#### TailorJS helps you save on bandwidth costs
 If your site is hosted "in the cloud", there is a chance you have to pay for bandwidth costs. If your site
 only returns the content (HTML, CSS, JavaScript, images, etc) that are needed, you will use less bandwidth. Using
 less bandwidth means lower cost.
 
-#### Improved performance
+#### TailorJS helps you improved performance
 Your web site will be downloaded faster because you are only returning the content that is required. Once downloaded,
 your web site will render faster. The reason why is because your site will only have to load the content that's needed.
 
@@ -26,6 +26,26 @@ pieces is the width and height of the user's browser. TailorJS stores this infor
 the query string so that you can use it on the server.
 
 ## What other features does TailorJS have?
+TailorJS has several other subtle features to help you build adaptive web sites.
+
+### Pre-Configured Layouts
+TailorJS has reviewed several CSS frameworks to help map between their breakpoints and common layout approaches. 
+
+#### Bootstrap
+TailorJS has been pre-configured with support for the following bootstrap version
+
+| Version     | Mobile Layout    | Portrait Layout | Landscape |
+|-------------|------------------|-----------------|-----------|
+| 4.0.0-alpha | < 768            | < 992           | >= 992    |
+| 3.3.5       | < 768            | < 992           | >= 992    |
+| Default     | < 768            | < 992           | >= 992    |
+
+### Default
+If you do not configure TailorJS with the name of a supported framework, the default values will be used. Those are:
+
+| Mobile Layout | Portrait Layout | Landscape Layout |
+| --------------|-----------------|------------------|
+| < 640         | < 1024          | >= 1024          |
 
 ### Query String Fallback
 TailorJS uses cookies to communicate to the server which layout is in use. However,
@@ -36,6 +56,7 @@ a parameter that will be placed in the query string.
 TailorJS uses a token to let the server know whether the user's browser has geolocation capabilities.
 
 # Using TailorJS
+To use TailorJS you can either follow the step-by-step instructions below or look at it all together.
 
 ## Step-by-Step
 To use TailorJS in your web app, do the following:
@@ -72,6 +93,7 @@ section below.
 ```
 
 # Configuring TailorJS
+TailorJS provides you with a variety
 Configuring TailorJS involves using the following values:
 
 ## abilities
