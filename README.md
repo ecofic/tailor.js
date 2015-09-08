@@ -3,24 +3,28 @@
 
 # What is TailorJS?
 TailorJS is a library for helping you build adaptive web sites.
-
-## What problems does TailorJS solve?
-TailorJS helps solve several challenges with building modern, fast web sites.
-
-### TailorJS helps you build adaptive web sites
 An adaptive web site enables a greater range of designs based on the user's browser's capabilities.
 TailorJS helps you take advantage of those capabilities and adjust on the server-side as needed.
 
-#### TailorJS helps you save on bandwidth costs
+## What problems does TailorJS solve?
+TailorJS addresses several challenges with building modern, fast web sites.
+
+### TailorJS helps you save on bandwidth costs
 If your site is hosted "in the cloud", there is a chance you have to pay for bandwidth costs. If your site
-only returns the content (HTML, CSS, JavaScript, images, etc) that are needed, you will use less bandwidth. Using
+only returns the content (HTML, CSS, JavaScript, images, etc) that's needed, you will use less bandwidth. Using
 less bandwidth means lower cost.
 
-#### TailorJS helps you improved performance
+TailorJS empowers you to configure "layouts". A layout specifies different views or the same page. For example,
+imagine a user visiting your site at "http://www.mysite.com/welcome". 
+You may want to show one view if they visit from their laptop and another if they are on their phone. TailorJS provides
+a "hook" that allows you to respond acoordingly on the server. This is different than a responsive site where all of 
+the code gets downloaded at once.
+
+### TailorJS helps you improve performance
 Your web site will be downloaded faster because you are only returning the content that is required. Once downloaded,
 your web site will render faster. The reason why is because your site will only have to load the content that's needed.
 
-### TailorJS helps you get more info about the user's browser to your server.
+### TailorJS helps you get more info about the browser to the server.
 When a user visits your website, some information is shared with the server. However, some of that information is
 missing. For example, the width and height of the user's browser. 
 

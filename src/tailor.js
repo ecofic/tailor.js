@@ -21,7 +21,7 @@ function tailor() {
  * version: '4.0.0-alpha', '3.3.5'
  */
 tailor.configure = function(options) {
-  var config = { layout: { resizeThreshold:tailor.settings.layout.resizeThreshold } };
+  var config = { layout: { resizeThreshold:tailor.settings.layout.resizeThreshold }, gps: {} };
   
   // Setup the layout details
   if (options.layout) {
@@ -60,26 +60,41 @@ tailor.configure = function(options) {
   }
   
   // Identify if the list of supported layout or cookie name have been specified
-  config.layout.supported = (options.layout.supported) ? options.layout.supported : tailor.settings.layout.supported;
-  config.layout.tokenName = (options.layout.tokenName) ? options.layout.tokenName : tailor.settings.layout.tokenName;
+  config.layout.supported = options.layout.supported || tailor.settings.layout.supported;
+  config.layout.tokenName = options.layout.tokenName || tailor.settings.layout.tokenName;
   
   // Identify if the browser supports gps
-  config.gps = tailor.settings.gps;
-  if (navigator.geolocation) {      
-      config.gps.isAvailable = navigator.geolocation;    
-      // removed until further testing has occurred.
-      // tailor.changedParams.push({key: config.gps.tokenName, value:true });          
+  if (!options.gps) {
+    options.gps = {};
   }
-  
-  // Identifiy if the current layout has been specified
+  config.gps.tokenName = options.gps.tokenName || tailor.settings.gps.tokenName;
+  config.gps.refreshOnAvailabilityChange = options.gps.refreshOnAvailabilityChange || tailor.settings.gps.refreshOnAvailabilityChange;
+
+  config.gps.isAvailable = options.gps.isAvailable;
+  if (!config.gps.isAvailable) {
+    config.gps.isAvailable = tailor.getTokenValue(config.gps.tokenName);
+    
+    var browserHasGps = (navigator.geolocation !== null).toString();
+    if (browserHasGps !== config.gps.isAvailable) {
+      if (browserHasGps || config.gps.isAvailable) {
+        if (config.gps.refreshOnAvailabilityChange) {
+          tailor.changeParam(config.gps.tokenName, true);
+        }
+      }
+    }
+  }
+
   if (options.layout.current) {
     config.layout.current = options.layout.current;
-  } else {
-    document.addEventListener('DOMContentLoaded', function(event) {
-      config.layout.current = tailor.getLayout();
-    });      
   }
-      
+  
+  document.addEventListener('DOMContentLoaded', function(event) {
+    if (!options.layout.current) {
+      config.layout.current = tailor.getLayout();      
+    }
+    tailor.attemptReload();
+  });
+          
   tailor.settings = config;
 };
 
@@ -98,21 +113,22 @@ tailor.attemptReload = function() {
     // Determine if a new layout is necessary
     var layout = tailor.getLayout();
     if (layout != tailor.settings.layout.current) {
-      tailor.changedParams.push({key: tailor.settings.layout.tokenName, value:layout });      
+      tailor.changeParam(tailor.settings.layout.tokenName, layout);
+      tailor.settings.layout.current = layout;
     }    
     
     // If any parameters have been changed, consider reloading the view.
-    var cp = tailor.changedParams;    
-    if (cp.length > 0) {
+    var cp = tailor.changedParams; 
+    if (tailor.countChangedParams() > 0) {
       if (navigator.cookieEnabled) {
-        for (var i=0; i<cp.length; i++) {
-          tailor.setCookie(cp[i].key, cp[i].value);
-        }                
+        for (var k1 in cp) {        
+          tailor.setCookie(k1, cp[k1]);
+        }
         location.reload();
       } else {
         var url = location.href;
-        for (var j=0; j<cp.length; j++) {
-          url = tailor.setQueryStringValue(url, cp[j].key, cp[j].value);
+        for (var k2 in cp) {        
+          url = tailor.setQueryStringValue(url, k2, cp[k2]);
         }
         location.replace(url);
       }
@@ -130,20 +146,24 @@ tailor.attemptReload = function() {
 tailor.getTokenValue = function(n) {
   var v = null;
   if (navigator.cookieEnabled) {
-    var cn = n + '=';
+    var cookieName = n + '=';
     var cookies = document.cookie.split(';');
     for (var i=0; i<cookies.length; i++) {
         var cookie = cookies[i];
         while (cookie.charAt(0)==' ') {
           cookie = cookie.substring(1);
         } 
-        if (cookie.indexOf(cn) === 0) {
-          v = cookie.substring(cn.length, cookie.length);
+        if (cookie.indexOf(cookieName) === 0) {
+          v = cookie.substring(cookieName.length, cookie.length);
           break;
         } 
     }
   } else {
-    // TODO
+    var url = window.location.href;
+    var regex = new RegExp( '[?&]' + n + '=([^&#]*)', 'i' );
+    var result = regex.exec(url);
+    
+    v = (result) ? result[1] : null;
   }
   return v;
 };
@@ -175,6 +195,26 @@ tailor.setQueryStringValue = function(u, n, v) {
 };
 
 /*
+ * This is a utility method used to keep track of changed parameters.
+ */
+tailor.changeParam = function(k, v) {
+    tailor.changedParams[k] = v;            
+};
+
+/* 
+ * This is a utility method that counts how many parameters have been changed.
+ */
+tailor.countChangedParams = function() {
+    var count = 0;
+    for (var key in tailor.changedParams) {
+      if (tailor.changedParams.hasOwnProperty(key)) {
+        count++;        
+      }
+    }
+    return count;  
+};
+
+/*
  * This is a utility method that helps identify what type of target
  * the screen width is associated with.
  */
@@ -197,8 +237,9 @@ tailor.getLayout = function(t) {
 tailor.settings = {  
   // The following are the gps settings used by tailor
   gps: {
-    tokenName: 'gps',                                  // This is the name of the cookie or query string value to look at on the server to identify if the user's browser supports Geolocation
-    isAvailable: false                                 // A flag that signals whether the user's browser supports geolocation.
+    tokenName: 'isGpsAvailable',                       // This is the name of the cookie or query string value to look at on the server to identify if the user's browser supports Geolocation
+    isAvailable: null,                                 // A flag that signals whether the user's browser supports geolocation.
+    refreshOnAvailabilityChange: true                  // A flag that signals whether the view should be refreshed if the gps availability changes.
   },
   
   // The following are the layout settings used by tailor  
