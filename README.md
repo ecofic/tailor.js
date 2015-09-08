@@ -1,4 +1,4 @@
-[![Version](http://img.shields.io/badge/version-0.6.0-yellow.svg?style=flat)](https://www.ecofic.com)
+[![Version](http://img.shields.io/badge/version-0.7.0-yellow.svg?style=flat)](https://www.ecofic.com)
 [![Built with Gulp](https://img.shields.io/badge/built%20with-gulp-green.svg)](http://gulpjs.com/)
 
 # What is TailorJS?
@@ -14,8 +14,9 @@ If your site is hosted "in the cloud", there is a chance you have to pay for ban
 only returns the content (HTML, CSS, JavaScript, images, etc) that's needed, you will use less bandwidth. Using
 less bandwidth means lower cost.
 
-TailorJS empowers you to configure "layouts". A layout specifies different views or the same page. For example,
-imagine a user visiting your site at "http://www.mysite.com/welcome". 
+TailorJS empowers you to configure "layouts" to adapt on the fly. 
+A layout specifies different views of a same page. 
+For example, imagine a user visiting your site at "http://www.mysite.com/welcome". 
 You may want to show one view if they visit from their laptop and another if they are on their phone. TailorJS provides
 a "hook" that allows you to respond acoordingly on the server. This is different than a responsive site where all of 
 the code gets downloaded at once.
@@ -73,6 +74,10 @@ a parameter that will be placed in the query string.
 ### Detects geo location abilities
 TailorJS uses a token to let the server know whether the user's browser has geolocation capabilities.
 
+## Frequently Asked Questions (FAQ)
+Here are some of the questions asked about TailorJS
+
+
 # Using TailorJS
 To use TailorJS you can follow the step-by-step instructions below or look at it all together.
 
@@ -117,21 +122,30 @@ Configuring TailorJS involves using the following values:
 ## abilities
 
 ### gps
+The following properties are configurable on the `gps` object.
 
-| Property Name | Possible Values | Description |
-|---------------|-----------------|-------------|
-
+| Property Name | Default Value  | Description                                                                                                                                      |
+|---------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| tokenName     | isGpsAvailable | The name of the cookie or query string parameter that stores whether the browser supports geolocation.                                           | 
+| isAvailable   | null           | A flag that signals if the browser has geolocation abilities. This is used to help minimize reloads while still giving the server what it needs. |
+| refreshOnAvailabilityChange | true | A flag that signals if the page should be reloaded if geolocation support is detected, but was not previously identified. | 
 
 ## layout
+The following properties are configurable on the `layout` object.
 
-| Property Name | Possible Values | Description |
+| Property Name | Default Value | Description |
 |---------------|-----------------|-------------|
-
+| framework | null | Identifies the CSS framework that is in use in the browser. Supported values include: `bootstrap`, `foundation`, and `custom` |
+| version | null | The version of the `framework` that is in use in the browser. This value should match a version listed by running `bower info [framework name]`. If TailorJS does not specifically support the given value, it will fallback. |
+| resizeThreshold | 200 | This is the number of milliseconds to wait when a user is refreshing their browser. This is to help keep performance up. |
+| supported | ['mobile', 'portrait', 'landscape'] | An array of supported layouts. At this time, three values are required here. If you only have two layouts, you could use ['mobile', 'laptop', 'laptop'] if need be. One of the values from this array is what will be available to the server via a cookie or query string parameter identifed by `tokenName` below. |
+| current | null | The current layout in use. This should be one of the values listed in the `supported` list. |
+| tokenName | layout | The name of the cookie or query string parameter that stores the name of the current layout used on the client-side. |
 
 # Contributing to TailorJS
 TailorJS is available for contribution. As new responsive frameworks (and versions of existing frameworks) emerge, 
-it may make sense to update this library to include them. 
-to include those breakpoints in the `tailor.supported.[framework]` section. The 
+it may make sense to update this library to include them. The definitions of the frameworks are defined in the
+`tailor.supported` object.
 
 ## Branching TailorJS
 TailorJS uses the [GitHub Flow](https://guides.github.com/introduction/flow/) workflow.
@@ -140,5 +154,5 @@ TailorJS uses the [GitHub Flow](https://guides.github.com/introduction/flow/) wo
 [TODO]
 
 ## Building TailorJS
-
 `gulp`
+`gulp deploy`
